@@ -15,9 +15,15 @@ import java.util.Scanner;
     private String homeAddress;
 
     public Person() {
-
     }
-
+    public Person(String fullName, String dateOfBirth, String contactNumber, String city, String country, String homeAddress) {
+        this.fullName = fullName;
+        this.dateOfBirth = dateOfBirth;
+        this.contactNumber = contactNumber;
+        this.city = city;
+        this.country = country;
+        this.homeAddress = homeAddress;
+    }
     public void inputInfo() {
         Scanner scanner = new Scanner(System.in);
 
@@ -72,8 +78,12 @@ import java.util.Scanner;
     public String getHomeAddress() {
         return homeAddress;
     }
+    @Override
+    public String toString() {
+        return "ПІБ: " + fullName + "\nДата народження: " + dateOfBirth + "\nКонтактний телефон: " + contactNumber +
+                "\nМісто: " + city + "\nКраїна: " + country + "\nДомашня адреса: " + homeAddress;
+    }
 }
-
 class Country {
      private String countryName;
      private String continentName;
@@ -84,6 +94,14 @@ class Country {
      public Country(){
          cities = new ArrayList<>();
      }
+    public Country(String countryName, String continentName, long population, int countryCode, String capital, List<String> cities) {
+        this.countryName = countryName;
+        this.continentName = continentName;
+        this.population = population;
+        this.countryCode = countryCode;
+        this.capital = capital;
+        this.cities = cities;
+    }
     public void inputInfo() {
         Scanner scanner = new Scanner(System.in);
 
@@ -149,8 +167,16 @@ class Country {
     public List<String> getCities() {
         return cities;
     }
-
+    public String toString() {
+        return "Назва країни: " + countryName +
+                "\nНазва континенту: " + continentName +
+                "\nКількість жителів: " + population +
+                "\nТелефонний код: " + countryCode +
+                "\nСтолиця: " + capital +
+                "\nМіста країни: " + cities.toString();
+    }
 }
+
 public class Main {
     public static void main(String[] args) {
        Scanner scanner = new Scanner(System.in);
@@ -162,13 +188,25 @@ public class Main {
                 person.inputInfo();
                 System.out.println("Інформація про людину:");
                 person.displayInfo();
+                Person person2 = new Person("Іван Петрович", "01.01.1990", "+1234567890", "Київ", "Україна", "вул. Головна, 1");
+                System.out.println("\nІнформація про людину 2:");
+                System.out.println(person2.toString());
             }
             break;
             case 2:{
-                Country country = new Country();
-                country.inputInfo();
-                System.out.println("Информация про страну:");
-                country.displayInfo();
+                List<String> citiesList = new ArrayList<>();
+                citiesList.add("Київ");
+                citiesList.add("Львів");
+                citiesList.add("Одеса");
+
+                Country country1 = new Country();
+                country1.inputInfo();
+                System.out.println("Інформація про країну 1:");
+                country1.displayInfo();
+
+                Country country2 = new Country("Україна", "Європа", 45000000, 380, "Київ", citiesList);
+                System.out.println("\nІнформація про країну 2:");
+                System.out.println(country2.toString());
             }
             break;
             default:
